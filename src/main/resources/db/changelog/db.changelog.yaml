@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: 0
+      author: Semyon Kirekov
+      changes:
+        - sql:
+            sql: >
+              CREATE TABLE fridge
+              (
+                  id   BIGSERIAL             NOT NULL,
+                  name VARCHAR(255)          NOT NULL,
+                  CONSTRAINT pk_fridge PRIMARY KEY (id)
+              );
+              CREATE TABLE product
+              (
+                  id        BIGSERIAL                     NOT NULL,
+                  fridge_id BIGINT                        NOT NULL,
+                  type      VARCHAR(50)                   NOT NULL,
+                  count     INTEGER                       NOT NULL,
+                  CONSTRAINT pk_product PRIMARY KEY (id)
+              );
+              ALTER TABLE product
+                  ADD CONSTRAINT FK_PRODUCT_ON_FRIDGE FOREIGN KEY (fridge_id) REFERENCES fridge (id);
