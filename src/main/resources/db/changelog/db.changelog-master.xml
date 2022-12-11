@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="0" author="Semyon Kirekov">
+        <sql>
+            CREATE TABLE fridge
+            (
+                id   BIGSERIAL PRIMARY KEY NOT NULL,
+                name VARCHAR(255)          NOT NULL,
+            );
+
+            CREATE TABLE product
+            (
+                id        BIGSERIAL PRIMARY KEY         NOT NULL,
+                fridge_id BIGINT REFERENCES fridge (id) NOT NULL,
+                type      VARCHAR(50)                   NOT NULL,
+                count     INTEGER                       NOT NULL
+            );
+        </sql>
+    </changeSet>
+</databaseChangeLog>
